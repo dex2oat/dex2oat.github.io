@@ -17,31 +17,6 @@
     
     
     <entry>
-      <title>test</title>
-      <link href="/2024/07/23/test1/"/>
-      <url>/2024/07/23/test1/</url>
-      
-        <content type="html"><![CDATA[<h1 id="RouterOS基本上网设置"><a href="#RouterOS基本上网设置" class="headerlink" title="RouterOS基本上网设置"></a>RouterOS基本上网设置</h1><p>test</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Network </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> mikrotik,routerOS </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Hello World</title>
       <link href="/2024/07/23/hello-world/"/>
       <url>/2024/07/23/hello-world/</url>
