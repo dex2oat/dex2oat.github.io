@@ -6,15 +6,19 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>RouterOS基本设置 | BOOK</title>
+  <title>v2raya多节点分流 | BOOK</title>
   <meta name="author" content="NONAME">
   
-  <meta name="description" content="RouterOS基本上网设置test">
+  <meta name="description" content="因GooglePlay区分地区需要不同代理节点
+例如需要5个不同的IP组，名为HK，JP，US，ID，BR
+1. 新增站点在v2raya的上方新增5个出站，命名为HK，JP，US，ID，BR。
+2. 选择节点依次选择出站，在每个出站的界面中连接特定的服务器节点。
+3.设置模式将“规则端口的分流模式”">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="RouterOS基本设置"/>
+  <meta property="og:title" content="v2raya多节点分流"/>
   <meta property="og:site_name" content="BOOK"/>
 
   
@@ -107,7 +111,7 @@
 
 	
 		<div class="page-header">
-			<h1> RouterOS基本设置</h1>
+			<h1> v2raya多节点分流</h1>
 		</div>
 	
 
@@ -124,7 +128,14 @@
 	<div class="mypage">		
 	  		
 
-	  <h1 id="RouterOS基本上网设置"><a href="#RouterOS基本上网设置" class="headerlink" title="RouterOS基本上网设置"></a>RouterOS基本上网设置</h1><p>test</p>
+	  <p>因GooglePlay区分地区需要不同代理节点</p>
+<p>例如需要5个不同的IP组，名为HK，JP，US，ID，BR</p>
+<h5 id="1-新增站点"><a href="#1-新增站点" class="headerlink" title="1. 新增站点"></a>1. 新增站点</h5><p>在v2raya的上方新增5个出站，命名为HK，JP，US，ID，BR。</p>
+<h5 id="2-选择节点"><a href="#2-选择节点" class="headerlink" title="2. 选择节点"></a>2. 选择节点</h5><p>依次选择出站，在每个出站的界面中连接特定的服务器节点。</p>
+<h5 id="3-设置模式"><a href="#3-设置模式" class="headerlink" title="3.设置模式"></a>3.设置模式</h5><p>将“规则端口的分流模式”选为“RoutingA”。</p>
+<h5 id="4-写入规则"><a href="#4-写入规则" class="headerlink" title="4. 写入规则"></a>4. 写入规则</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">inbound: crawlerin1 = http(address:127.0.0.1, port:30001)</span><br><span class="line">inbound: crawlerin2 = http(address:127.0.0.1, port:30002)</span><br><span class="line">inbound: crawlerin3 = http(address:127.0.0.1, port:30003)</span><br><span class="line">inbound: crawlerin4 = http(address:127.0.0.1, port:30004)</span><br><span class="line">inbound: crawlerin5 = http(address:127.0.0.1, port:30005)</span><br><span class="line"></span><br><span class="line">inboundTag(crawlerin1)-&gt;HK</span><br><span class="line">inboundTag(crawlerin2)-&gt;JP</span><br><span class="line">inboundTag(crawlerin3)-&gt;US</span><br><span class="line">inboundTag(crawlerin4)-&gt;ID</span><br><span class="line">inboundTag(crawlerin5)-&gt;BR</span><br></pre></td></tr></table></figure>
+
+<p>在代码中使用30001-30005端口以选择不同的IP出口。</p>
 	  
 	</div>
 
@@ -134,13 +145,12 @@
 
     
     
-    <a href="/2024/07/23/alist设置别名/" type="button" class="btn btn-default"><i
-                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/2024/07/23/Docker/DockerCompose/matrix/" type="button" class="btn btn-default ">Next<i
+    <a href="/2024/07/24/Docker/DockerCompose/vaultwarden/" type="button" class="btn btn-default ">Next<i
                 class="fa fa-arrow-circle-o-right"></i></a>
     
 
@@ -169,7 +179,7 @@
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2024-07-23 
+	2024-07-24 
 	</div>
 	
 
@@ -180,7 +190,7 @@
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/Network/">Network<span>1</span></a></li>
+    <li><a href="/categories/Network/">Network<span>2</span></a></li>
   </li>
 
     </ul>
@@ -193,7 +203,7 @@
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/mikrotik/">mikrotik<span>1</span></a></li>
+  <li><a href="/tags/v2raya/">v2raya<span>1</span></a></li>
     </ul>
 	</div>
 		

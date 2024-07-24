@@ -4,13 +4,25 @@
   
     
     <entry>
-      <title></title>
-      <link href="/2024/07/24/v2raya%E5%A4%9A%E8%8A%82%E7%82%B9%E5%88%86%E6%B5%81/"/>
-      <url>/2024/07/24/v2raya%E5%A4%9A%E8%8A%82%E7%82%B9%E5%88%86%E6%B5%81/</url>
+      <title>v2raya多节点分流</title>
+      <link href="/2024/07/24/Network/Proxy/v2raya%E5%A4%9A%E8%8A%82%E7%82%B9%E5%88%86%E6%B5%81/"/>
+      <url>/2024/07/24/Network/Proxy/v2raya%E5%A4%9A%E8%8A%82%E7%82%B9%E5%88%86%E6%B5%81/</url>
       
-        <content type="html"><![CDATA[<h1 id="v2raya多节点分流"><a href="#v2raya多节点分流" class="headerlink" title="v2raya多节点分流"></a>v2raya多节点分流</h1><p>因GooglePlay区分地区需要不同代理节点</p><p>例如需要5个不同的IP组，名为HK，JP，US，ID，BR</p><h5 id="1-新增站点"><a href="#1-新增站点" class="headerlink" title="1. 新增站点"></a>1. 新增站点</h5><p>在v2raya的上方新增5个出站，命名为HK，JP，US，ID，BR。</p><h5 id="2-选择节点"><a href="#2-选择节点" class="headerlink" title="2. 选择节点"></a>2. 选择节点</h5><p>依次选择出站，在每个出站的界面中连接特定的服务器节点。</p><h5 id="3-设置模式"><a href="#3-设置模式" class="headerlink" title="3.设置模式"></a>3.设置模式</h5><p>将“规则端口的分流模式”选为“RoutingA”。</p><h5 id="4-写入规则"><a href="#4-写入规则" class="headerlink" title="4. 写入规则"></a>4. 写入规则</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">inbound: crawlerin1 = http(address:127.0.0.1, port:30001)</span><br><span class="line">inbound: crawlerin2 = http(address:127.0.0.1, port:30002)</span><br><span class="line">inbound: crawlerin3 = http(address:127.0.0.1, port:30003)</span><br><span class="line">inbound: crawlerin4 = http(address:127.0.0.1, port:30004)</span><br><span class="line">inbound: crawlerin5 = http(address:127.0.0.1, port:30005)</span><br><span class="line"></span><br><span class="line">inboundTag(crawlerin1)-&gt;HK</span><br><span class="line">inboundTag(crawlerin2)-&gt;JP</span><br><span class="line">inboundTag(crawlerin3)-&gt;US</span><br><span class="line">inboundTag(crawlerin4)-&gt;ID</span><br><span class="line">inboundTag(crawlerin5)-&gt;BR</span><br></pre></td></tr></table></figure><p>在代码中使用30001-30005端口以选择不同的IP出口。</p>]]></content>
+        <content type="html"><![CDATA[<p>因GooglePlay区分地区需要不同代理节点</p><p>例如需要5个不同的IP组，名为HK，JP，US，ID，BR</p><h5 id="1-新增站点"><a href="#1-新增站点" class="headerlink" title="1. 新增站点"></a>1. 新增站点</h5><p>在v2raya的上方新增5个出站，命名为HK，JP，US，ID，BR。</p><h5 id="2-选择节点"><a href="#2-选择节点" class="headerlink" title="2. 选择节点"></a>2. 选择节点</h5><p>依次选择出站，在每个出站的界面中连接特定的服务器节点。</p><h5 id="3-设置模式"><a href="#3-设置模式" class="headerlink" title="3.设置模式"></a>3.设置模式</h5><p>将“规则端口的分流模式”选为“RoutingA”。</p><h5 id="4-写入规则"><a href="#4-写入规则" class="headerlink" title="4. 写入规则"></a>4. 写入规则</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">inbound: crawlerin1 = http(address:127.0.0.1, port:30001)</span><br><span class="line">inbound: crawlerin2 = http(address:127.0.0.1, port:30002)</span><br><span class="line">inbound: crawlerin3 = http(address:127.0.0.1, port:30003)</span><br><span class="line">inbound: crawlerin4 = http(address:127.0.0.1, port:30004)</span><br><span class="line">inbound: crawlerin5 = http(address:127.0.0.1, port:30005)</span><br><span class="line"></span><br><span class="line">inboundTag(crawlerin1)-&gt;HK</span><br><span class="line">inboundTag(crawlerin2)-&gt;JP</span><br><span class="line">inboundTag(crawlerin3)-&gt;US</span><br><span class="line">inboundTag(crawlerin4)-&gt;ID</span><br><span class="line">inboundTag(crawlerin5)-&gt;BR</span><br></pre></td></tr></table></figure><p>在代码中使用30001-30005端口以选择不同的IP出口。</p>]]></content>
       
       
+      <categories>
+          
+          <category> Network </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> v2raya </tag>
+            
+        </tags>
       
     </entry>
     
@@ -42,9 +54,34 @@
     
     
     <entry>
+      <title>matrix</title>
+      <link href="/2024/07/23/Docker/DockerCompose/matrix/"/>
+      <url>/2024/07/23/Docker/DockerCompose/matrix/</url>
+      
+        <content type="html"><![CDATA[<p>Matrix 是一个开源、可交互、去中心化的实时通信服务框架。使用 Matrix 可以搭建安全的通信服务器，配合支持 Matrix 的客户端可以实现个人、团队间的实时聊天交互，对Matrix Dendrite搭建聊天服务器的过程感兴趣的朋友一起看看吧</p><h1 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h1><h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><pre><code>version: &quot;3&quot;services:  db:    restart: always    image: postgres:latest    shm_size: 1024mb    container_name: synapse-postgres    networks:      - dbs_network    healthcheck:      test: [&quot;CMD&quot;, &quot;pg_isready&quot;, &quot;-U&quot;, &quot;postgres&quot;]    volumes:      - ./postgres:/var/lib/postgresql/data    environment:      - &quot;PUID=1030&quot;      - &quot;PGID=100&quot;      - &quot;TZ:=Asia/Shanghai&quot;  redis:    restart: always    image: redis:latest    container_name: synapse-redis    networks:      - dbs_network    healthcheck:      test: [&quot;CMD&quot;, &quot;redis-cli&quot;, &quot;ping&quot;]    volumes:      - ./redis:/data    environment:      - &quot;PUID=1030&quot;      - &quot;PGID=100&quot;      - &quot;TZ:=Asia/Shanghai&quot;  synapse:    image: matrixdotorg/synapse:latest    container_name: matrix-synapse    ports:      - 38008:8008    depends_on:      - db      - redis    volumes:      - ./data:/data    restart: always    networks:      - synapse_network      - dbs_network    environment:      - &quot;PUID=1030&quot;      - &quot;PGID=100&quot;      - &quot;TZ:=Asia/Shanghai&quot;networks:  synapse_network:  dbs_network:    internal: true</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> matrix </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>alist别名</title>
-      <link href="/2024/07/23/alist%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/"/>
-      <url>/2024/07/23/alist%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/</url>
+      <link href="/2024/07/23/Docker/alist%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/"/>
+      <url>/2024/07/23/Docker/alist%E8%AE%BE%E7%BD%AE%E5%88%AB%E5%90%8D/</url>
       
         <content type="html"><![CDATA[<p>alist通过设置别名实现将不同目录内容整合到一个路径</p>]]></content>
       
@@ -68,8 +105,8 @@
     
     <entry>
       <title>RouterOS基本设置</title>
-      <link href="/2024/07/23/routeros%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/"/>
-      <url>/2024/07/23/routeros%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
+      <link href="/2024/07/23/Network/RouterOS/routeros%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/"/>
+      <url>/2024/07/23/Network/RouterOS/routeros%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
       
         <content type="html"><![CDATA[<h1 id="RouterOS基本上网设置"><a href="#RouterOS基本上网设置" class="headerlink" title="RouterOS基本上网设置"></a>RouterOS基本上网设置</h1><p>test</p>]]></content>
       
@@ -84,31 +121,6 @@
         <tags>
             
             <tag> mikrotik </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>matrix</title>
-      <link href="/2024/07/23/Docker/DockerCompose/matrix/"/>
-      <url>/2024/07/23/Docker/DockerCompose/matrix/</url>
-      
-        <content type="html"><![CDATA[<p>Matrix 是一个开源、可交互、去中心化的实时通信服务框架。使用 Matrix 可以搭建安全的通信服务器，配合支持 Matrix 的客户端可以实现个人、团队间的实时聊天交互，对Matrix Dendrite搭建聊天服务器的过程感兴趣的朋友一起看看吧</p><h1 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h1><h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><pre><code>version: &quot;3&quot;services:  db:    restart: always    image: postgres:latest    shm_size: 1024mb    container_name: synapse-postgres    networks:      - dbs_network    healthcheck:      test: [&quot;CMD&quot;, &quot;pg_isready&quot;, &quot;-U&quot;, &quot;postgres&quot;]    volumes:      - ./postgres:/var/lib/postgresql/data    environment:      - &quot;PUID=1030&quot;      - &quot;PGID=100&quot;      - &quot;TZ:=Asia/Shanghai&quot;  redis:    restart: always    image: redis:latest    container_name: synapse-redis    networks:      - dbs_network    healthcheck:      test: [&quot;CMD&quot;, &quot;redis-cli&quot;, &quot;ping&quot;]    volumes:      - ./redis:/data    environment:      - &quot;PUID=1030&quot;      - &quot;PGID=100&quot;      - &quot;TZ:=Asia/Shanghai&quot;  synapse:    image: matrixdotorg/synapse:latest    container_name: matrix-synapse    ports:      - 38008:8008    depends_on:      - db      - redis    volumes:      - ./data:/data    restart: always    networks:      - synapse_network      - dbs_network    environment:      - &quot;PUID=1030&quot;      - &quot;PGID=100&quot;      - &quot;TZ:=Asia/Shanghai&quot;networks:  synapse_network:  dbs_network:    internal: true</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> Docker </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> matrix </tag>
             
         </tags>
       
