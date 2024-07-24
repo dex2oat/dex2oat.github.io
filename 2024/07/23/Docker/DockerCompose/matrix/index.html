@@ -6,15 +6,16 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>RouterOS基本设置 | BOOK</title>
+  <title>matrix | BOOK</title>
   <meta name="author" content="NONAME">
   
-  <meta name="description" content="RouterOS基本上网设置test">
+  <meta name="description" content="Matrix 是一个开源、可交互、去中心化的实时通信服务框架。使用 Matrix 可以搭建安全的通信服务器，配合支持 Matrix 的客户端可以实现个人、团队间的实时聊天交互，对Matrix Dendrite搭建聊天服务器的过程感兴趣的朋友一起看看吧
+部署方式docker-composeversio">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="RouterOS基本设置"/>
+  <meta property="og:title" content="matrix"/>
   <meta property="og:site_name" content="BOOK"/>
 
   
@@ -107,7 +108,7 @@
 
 	
 		<div class="page-header">
-			<h1> RouterOS基本设置</h1>
+			<h1> matrix</h1>
 		</div>
 	
 
@@ -124,7 +125,63 @@
 	<div class="mypage">		
 	  		
 
-	  <h1 id="RouterOS基本上网设置"><a href="#RouterOS基本上网设置" class="headerlink" title="RouterOS基本上网设置"></a>RouterOS基本上网设置</h1><p>test</p>
+	  <p>Matrix 是一个开源、可交互、去中心化的实时通信服务框架。使用 Matrix 可以搭建安全的通信服务器，配合支持 Matrix 的客户端可以实现个人、团队间的实时聊天交互，对Matrix Dendrite搭建聊天服务器的过程感兴趣的朋友一起看看吧</p>
+<h1 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h1><h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><pre><code>version: &quot;3&quot;
+services:
+  db:
+    restart: always
+    image: postgres:latest
+    shm_size: 1024mb
+    container_name: synapse-postgres
+    networks:
+      - dbs_network
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;pg_isready&quot;, &quot;-U&quot;, &quot;postgres&quot;]
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    environment:
+      - &quot;PUID=1030&quot;
+      - &quot;PGID=100&quot;
+      - &quot;TZ:=Asia/Shanghai&quot;
+
+  redis:
+    restart: always
+    image: redis:latest
+    container_name: synapse-redis
+    networks:
+      - dbs_network
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;redis-cli&quot;, &quot;ping&quot;]
+    volumes:
+      - ./redis:/data
+    environment:
+      - &quot;PUID=1030&quot;
+      - &quot;PGID=100&quot;
+      - &quot;TZ:=Asia/Shanghai&quot;
+
+  synapse:
+    image: matrixdotorg/synapse:latest
+    container_name: matrix-synapse
+    ports:
+      - 38008:8008
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./data:/data
+    restart: always
+    networks:
+      - synapse_network
+      - dbs_network
+    environment:
+      - &quot;PUID=1030&quot;
+      - &quot;PGID=100&quot;
+      - &quot;TZ:=Asia/Shanghai&quot;
+networks:
+  synapse_network:
+  dbs_network:
+    internal: true
+</code></pre>
 	  
 	</div>
 
@@ -134,13 +191,13 @@
 
     
     
-    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    <a href="/2024/07/23/routeros基本设置/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/2024/07/23/alist设置别名/" type="button" class="btn btn-default ">Next<i
-                class="fa fa-arrow-circle-o-right"></i></a>
+    <a type="button" class="btn btn-default disabled">Next<i class="fa fa-arrow-circle-o-right"></i></a>
     
 
     
@@ -179,7 +236,7 @@
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/Network/">Network<span>1</span></a></li>
+    <li><a href="/categories/Docker/">Docker<span>3</span></a></li>
   </li>
 
     </ul>
@@ -192,7 +249,7 @@
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/mikrotik/">mikrotik<span>1</span></a></li>
+  <li><a href="/tags/matrix/">matrix<span>1</span></a></li>
     </ul>
 	</div>
 		

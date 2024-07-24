@@ -130,11 +130,11 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/07/23/routeros_init/" >RouterOS基本设置</a>
+			<a href="/2024/07/24/Docker/DockerCompose/vaultwarden/" >bitwarden</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
-		<div class="date">post @ 2024-07-23  </div>
+		<div class="date">post @ 2024-07-24  </div>
 		</div>
 	</div>
 	
@@ -144,11 +144,29 @@
   <div class="row">
 	
 	
-		<h1 id="RouterOS基本上网设置"><a href="#RouterOS基本上网设置" class="headerlink" title="RouterOS基本上网设置"></a>RouterOS基本上网设置</h1><p>test</p>
+		<p>bitwarden第三方服务端</p>
+<pre><code>version: &quot;3&quot;
+services:
+  vaultwarden:
+    image: vaultwarden/server
+    container_name: vaultwarden
+    restart: always
+    ports:
+        - 10888:80
+        - 3012:3012
+    volumes:
+      - ./vwdata:/data
+    environment:
+      TZ: Asia/Shanghai
+      INVITATiONS_ALLOWED: &quot;false&quot;
+      SIGNUPS_ALLOWED: &quot;false&quot;
+      WEB_VAULT_ENABLED: &quot;false&quot;
+      LOG_FILE: /data/bitwarden.log
+</code></pre>
 
 	
 	</div>
-  <a type="button" href="/2024/07/23/routeros_init/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/07/24/Docker/DockerCompose/vaultwarden/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -186,7 +204,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/07/23/hello-world/" >Hello World</a>
+			<a href="/2024/07/23/routeros基本设置/" >RouterOS基本设置</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -200,23 +218,95 @@
   <div class="row">
 	
 	
-		<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+		<h1 id="RouterOS基本上网设置"><a href="#RouterOS基本上网设置" class="headerlink" title="RouterOS基本上网设置"></a>RouterOS基本上网设置</h1><p>test</p>
 
 	
 	</div>
-  <a type="button" href="/2024/07/23/hello-world/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/07/23/routeros基本设置/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/07/23/Docker/DockerCompose/matrix/" >matrix</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-07-23  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Matrix 是一个开源、可交互、去中心化的实时通信服务框架。使用 Matrix 可以搭建安全的通信服务器，配合支持 Matrix 的客户端可以实现个人、团队间的实时聊天交互，对Matrix Dendrite搭建聊天服务器的过程感兴趣的朋友一起看看吧</p>
+<h1 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h1><h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><pre><code>version: &quot;3&quot;
+services:
+  db:
+    restart: always
+    image: postgres:latest
+    shm_size: 1024mb
+    container_name: synapse-postgres
+    networks:
+      - dbs_network
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;pg_isready&quot;, &quot;-U&quot;, &quot;postgres&quot;]
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    environment:
+      - &quot;PUID=1030&quot;
+      - &quot;PGID=100&quot;
+      - &quot;TZ:=Asia/Shanghai&quot;
+
+  redis:
+    restart: always
+    image: redis:latest
+    container_name: synapse-redis
+    networks:
+      - dbs_network
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;redis-cli&quot;, &quot;ping&quot;]
+    volumes:
+      - ./redis:/data
+    environment:
+      - &quot;PUID=1030&quot;
+      - &quot;PGID=100&quot;
+      - &quot;TZ:=Asia/Shanghai&quot;
+
+  synapse:
+    image: matrixdotorg/synapse:latest
+    container_name: matrix-synapse
+    ports:
+      - 38008:8008
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./data:/data
+    restart: always
+    networks:
+      - synapse_network
+      - dbs_network
+    environment:
+      - &quot;PUID=1030&quot;
+      - &quot;PGID=100&quot;
+      - &quot;TZ:=Asia/Shanghai&quot;
+networks:
+  synapse_network:
+  dbs_network:
+    internal: true
+</code></pre>
+
+	
+	</div>
+  <a type="button" href="/2024/07/23/Docker/DockerCompose/matrix/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -257,7 +347,7 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/Docker/">Docker<span>1</span></a></li>
+			<li><a href="/categories/Docker/">Docker<span>3</span></a></li>
 		
 			<li><a href="/categories/Network/">Network<span>1</span></a></li>
 		
@@ -270,9 +360,13 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
+			<li><a href="/tags/matrix/">matrix<span>1</span></a></li>
+		
 			<li><a href="/tags/alist/">alist<span>1</span></a></li>
 		
 			<li><a href="/tags/mikrotik/">mikrotik<span>1</span></a></li>
+		
+			<li><a href="/tags/bitwarden/">bitwarden<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -286,7 +380,7 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2024/07/23/routeros_init/" ><i class="fa fa-file-o"></i>RouterOS基本设置</a>
+        <a href="/2024/07/24/Docker/DockerCompose/vaultwarden/" ><i class="fa fa-file-o"></i>bitwarden</a>
       </li>
     
       <li>
@@ -294,7 +388,11 @@
       </li>
     
       <li>
-        <a href="/2024/07/23/hello-world/" ><i class="fa fa-file-o"></i>Hello World</a>
+        <a href="/2024/07/23/routeros基本设置/" ><i class="fa fa-file-o"></i>RouterOS基本设置</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/23/Docker/DockerCompose/matrix/" ><i class="fa fa-file-o"></i>matrix</a>
       </li>
     
   </ul>

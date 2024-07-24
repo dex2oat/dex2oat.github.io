@@ -4,23 +4,23 @@
   
     
     <entry>
-      <title>RouterOS基本设置</title>
-      <link href="/2024/07/23/routeros_init/"/>
-      <url>/2024/07/23/routeros_init/</url>
+      <title>bitwarden</title>
+      <link href="/2024/07/24/Docker/DockerCompose/vaultwarden/"/>
+      <url>/2024/07/24/Docker/DockerCompose/vaultwarden/</url>
       
-        <content type="html"><![CDATA[<h1 id="RouterOS基本上网设置"><a href="#RouterOS基本上网设置" class="headerlink" title="RouterOS基本上网设置"></a>RouterOS基本上网设置</h1><p>test</p>]]></content>
+        <content type="html"><![CDATA[<p>bitwarden第三方服务端</p><pre><code>version: &quot;3&quot;services:  vaultwarden:    image: vaultwarden/server    container_name: vaultwarden    restart: always    ports:        - 10888:80        - 3012:3012    volumes:      - ./vwdata:/data    environment:      TZ: Asia/Shanghai      INVITATiONS_ALLOWED: &quot;false&quot;      SIGNUPS_ALLOWED: &quot;false&quot;      WEB_VAULT_ENABLED: &quot;false&quot;      LOG_FILE: /data/bitwarden.log</code></pre>]]></content>
       
       
       <categories>
           
-          <category> Network </category>
+          <category> Docker </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> mikrotik </tag>
+            <tag> bitwarden </tag>
             
         </tags>
       
@@ -54,13 +54,50 @@
     
     
     <entry>
-      <title>Hello World</title>
-      <link href="/2024/07/23/hello-world/"/>
-      <url>/2024/07/23/hello-world/</url>
+      <title>RouterOS基本设置</title>
+      <link href="/2024/07/23/routeros%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/"/>
+      <url>/2024/07/23/routeros%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
       
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="RouterOS基本上网设置"><a href="#RouterOS基本上网设置" class="headerlink" title="RouterOS基本上网设置"></a>RouterOS基本上网设置</h1><p>test</p>]]></content>
       
       
+      <categories>
+          
+          <category> Network </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mikrotik </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>matrix</title>
+      <link href="/2024/07/23/Docker/DockerCompose/matrix/"/>
+      <url>/2024/07/23/Docker/DockerCompose/matrix/</url>
+      
+        <content type="html"><![CDATA[<p>Matrix 是一个开源、可交互、去中心化的实时通信服务框架。使用 Matrix 可以搭建安全的通信服务器，配合支持 Matrix 的客户端可以实现个人、团队间的实时聊天交互，对Matrix Dendrite搭建聊天服务器的过程感兴趣的朋友一起看看吧</p><h1 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h1><h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><pre><code>version: &quot;3&quot;services:  db:    restart: always    image: postgres:latest    shm_size: 1024mb    container_name: synapse-postgres    networks:      - dbs_network    healthcheck:      test: [&quot;CMD&quot;, &quot;pg_isready&quot;, &quot;-U&quot;, &quot;postgres&quot;]    volumes:      - ./postgres:/var/lib/postgresql/data    environment:      - &quot;PUID=1030&quot;      - &quot;PGID=100&quot;      - &quot;TZ:=Asia/Shanghai&quot;  redis:    restart: always    image: redis:latest    container_name: synapse-redis    networks:      - dbs_network    healthcheck:      test: [&quot;CMD&quot;, &quot;redis-cli&quot;, &quot;ping&quot;]    volumes:      - ./redis:/data    environment:      - &quot;PUID=1030&quot;      - &quot;PGID=100&quot;      - &quot;TZ:=Asia/Shanghai&quot;  synapse:    image: matrixdotorg/synapse:latest    container_name: matrix-synapse    ports:      - 38008:8008    depends_on:      - db      - redis    volumes:      - ./data:/data    restart: always    networks:      - synapse_network      - dbs_network    environment:      - &quot;PUID=1030&quot;      - &quot;PGID=100&quot;      - &quot;TZ:=Asia/Shanghai&quot;networks:  synapse_network:  dbs_network:    internal: true</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> matrix </tag>
+            
+        </tags>
       
     </entry>
     
